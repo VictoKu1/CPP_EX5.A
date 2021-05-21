@@ -1,4 +1,4 @@
-#include "doctest.h"
+#pragma once 
 #include <ostream>
 using namespace std;
 namespace ariel {
@@ -28,3 +28,13 @@ public:
   friend ostream &operator<<(ostream &os, const BinaryTree<T> &root);
 };
 } // namespace ariel
+
+
+
+
+
+
+
+
+
+
