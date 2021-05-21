@@ -1,4 +1,5 @@
 #include "doctest.h"
+#include <ostream>
 using namespace std;
 namespace ariel {
 template <typename T> class BinaryTree {
@@ -24,5 +25,6 @@ public:
   //*end_inorder().
   //*begin_postorder().
   //*end_postorder().
+  friend ostream &operator<<(ostream &os, const BinaryTree<T> &root);
 };
 } // namespace ariel
