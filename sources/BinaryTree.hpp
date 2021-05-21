@@ -32,3 +32,5 @@ public:
   friend ostream &operator<<(ostream &os, const BinaryTree<T> &root);
 };
 } // namespace ariel
+
+
