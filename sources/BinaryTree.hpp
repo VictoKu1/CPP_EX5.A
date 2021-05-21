@@ -1,19 +1,23 @@
-#pragma once 
+#pragma once
 #include <ostream>
 using namespace std;
 namespace ariel {
 template <typename T> class BinaryTree {
 private:
-  BinaryTree<T> *root;
-  BinaryTree<T> *left;
-  BinaryTree<T> *right;
-  T data;
+  class Node {
+  public:
+    Node *left;
+    Node *right;
+    T data;
+    Node(Node *left, const T &data, Node *right)
+        : left(left), data(data), right(right) {}
+    Node(const T &data) { (*this) = Node(nullptr, data, nullptr); }
+  };
+  Node *root;
   int size;
-  int rightSize;
-  int leftSize;
 
 public:
-  BinaryTree() {}
+  BinaryTree() : root(nullptr) { size = 0; }
   ~BinaryTree() {}
   BinaryTree<T> add_root(T *newRoot);
   BinaryTree<T> add_left(T *newLeft);
@@ -28,13 +32,3 @@ public:
   friend ostream &operator<<(ostream &os, const BinaryTree<T> &root);
 };
 } // namespace ariel
-
-
-
-
-
-
-
-
-
-
