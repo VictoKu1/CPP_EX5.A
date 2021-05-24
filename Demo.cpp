@@ -32,7 +32,7 @@ int main() {
 |---|
 4   5
 */
-
+auto it = tree_of_ints.begin_preorder();
   for (auto it = tree_of_ints.begin_preorder();
        it != tree_of_ints.end_preorder(); ++it) {
     cout << (*it) << " ";
