@@ -1,4 +1,3 @@
-//*TODO.
 #pragma once
 #include <iostream>
 #include <list>
@@ -57,7 +56,6 @@ public:
   template <typename P>
   friend ostream &operator<<(ostream &os, BinaryTree<P> const &root);
 };
-//*Implementation.
 
 template <typename T> bool BinaryTree<T>::contains(T key) {
   return nodeMap.count(key) > 0;
@@ -193,19 +191,26 @@ typename list<T>::iterator BinaryTree<T>::end_postorder() {
   }
   return itr.end();
 }
+
 template <typename T> typename list<T>::iterator BinaryTree<T>::begin() {
   itr.clear();
   begin_inorder();
   return itr.begin();
 }
+
 template <typename T> typename list<T>::iterator BinaryTree<T>::end() {
   if (setWasChanged) {
     begin_inorder();
   }
   return itr.end();
 }
+
+//*TODO.
 template <typename T>
 ostream &operator<<(ostream &os, BinaryTree<T> const &root) {
   return os;
 }
 } // namespace ariel
+
+
+
