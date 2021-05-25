@@ -5,7 +5,6 @@
 #include <ostream>
 using namespace std;
 namespace ariel {
-
 enum Direction { Right, Left };
 template <typename T> class BinaryTree {
   using Iterator = typename list<T>::iterator;
@@ -210,6 +209,7 @@ ostream &operator<<(ostream &os, BinaryTree<T> const &root) {
   return os;
 }
 } // namespace ariel
+
 
 
 
