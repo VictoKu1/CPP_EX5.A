@@ -5,7 +5,7 @@
 #include <ostream>
 using namespace std;
 namespace ariel {
-//*Headers.
+
 enum Direction { Right, Left };
 template <typename T> class BinaryTree {
   using Iterator = typename list<T>::iterator;
