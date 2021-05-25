@@ -4,7 +4,6 @@
  * @author Erel Segal-Halevi
  * @since 2021-04
  */
-
 #include <fstream>
 #include <iostream>
 #include <sstream>
