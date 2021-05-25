@@ -27,6 +27,7 @@ private:
       left = node.left;
     }
   };
+  
   bool setWasChanged = true;
   map<T, Node *> nodeMap;
   Node *root;
