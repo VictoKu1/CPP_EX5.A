@@ -205,12 +205,12 @@ template <typename T> typename list<T>::iterator BinaryTree<T>::end() {
   return itr.end();
 }
 
-//*TODO.
 template <typename T>
 ostream &operator<<(ostream &os, BinaryTree<T> const &root) {
   return os;
 }
 } // namespace ariel
+
 
 
 
