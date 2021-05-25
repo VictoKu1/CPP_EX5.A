@@ -3,6 +3,11 @@
 #include <list>
 #include <map>
 #include <ostream>
+#include <sstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <streambuf>
+#include <string>
 using namespace std;
 namespace ariel {
 enum Direction { Right, Left };
@@ -22,8 +27,6 @@ private:
       left = node.left;
     }
   };
-
-private:
   bool setWasChanged = true;
   map<T, Node *> nodeMap;
   Node *root;
@@ -33,6 +36,7 @@ private:
   void preorder(Node *node);
   void inorder(Node *node);
   void postorder(Node *node);
+  void print2DUtil(Node *root, int space);
 
 public:
   BinaryTree<T>() : root(nullptr), nodeMap(), itr() {}
@@ -54,6 +58,22 @@ public:
   Iterator end();
   template <typename P>
   friend ostream &operator<<(ostream &os, BinaryTree<P> const &root);
+  void print2D(Node *bnrtree);
+};
+
+class coutRedirect {
+public:
+  std::stringstream buffer;
+  std::streambuf *old;
+  coutRedirect() {
+    old = std::cout.rdbuf(buffer.rdbuf()); //*Redirect cout to buffer stream.
+  }
+  std::string getString() const {
+    return buffer.str(); //*Get string .
+  }
+  void coutRedirectCancel() const {
+    std::cout.rdbuf(old); //*Reverse redirect .
+  }
 };
 
 template <typename T> bool BinaryTree<T>::contains(T key) {
@@ -204,9 +224,52 @@ template <typename T> typename list<T>::iterator BinaryTree<T>::end() {
   return itr.end();
 }
 
+//*Function to print binary tree in 2D.
+//*It does reverse inorder traversal.
+template <typename T> void BinaryTree<T>::print2DUtil(Node *root, int space) {
+  const int COUNT = 5;
+  //*Base case .
+  if (root == NULL) {
+    return;
+  }
+  //*Increase distance between levels .
+  space += COUNT;
+
+  //*Process right child first .
+  print2DUtil(root->right, space);
+
+  //*Print current node after space count .
+  cout << endl;
+  for (int i = COUNT; i < space; i++) {
+    if (i >= space - COUNT) {
+
+      if (i == space - COUNT) {
+        cout << "|";
+      } else {
+        cout << "-";
+      }
+    } else {
+      cout << " ";
+    }
+  }
+  cout << root->data << "\n";
+
+  //*Process left child.
+  print2DUtil(root->left, space);
+}
+
+//*Wrapper over print2DUtil().
+template <typename T> void BinaryTree<T>::print2D(Node *bnrtree) {
+  print2DUtil(root, 0);
+}
+
 template <typename T>
-ostream &operator<<(ostream &os, BinaryTree<T> const &root) {
-  return os;
+ostream &operator<<(ostream &os, BinaryTree<T> const &bnrtree) {
+  coutRedirect redirection;
+  (const_cast<BinaryTree<T> &>(bnrtree)).print2D(bnrtree.root);
+  string out = redirection.getString();
+  redirection.coutRedirectCancel();
+  return os << out << endl;
 }
 } // namespace ariel
 
